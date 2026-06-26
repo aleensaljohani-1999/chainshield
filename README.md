@@ -22,6 +22,60 @@
 
 ---
 
+## Getting Started
+
+### Prerequisites
+
+- Python 3.10 or higher
+- pip
+
+### Clone & install
+
+```bash
+git clone https://github.com/aleensaljohani-1999/chainshield.git
+cd chainshield
+pip install flask
+pip install -e .
+```
+
+### Run the interactive demo
+
+```bash
+python3 demo_app.py
+```
+
+Then open your browser at `http://localhost:5050`.
+
+Use the **Send** buttons to simulate requests from different clients and watch the rate limiter, blacklist, and global ceiling respond in real time.
+
+### Run the library directly
+
+```python
+from chainshield import Guardian, GuardianConfig
+
+guardian = Guardian(
+    GuardianConfig(
+        max_requests=5,
+        window_size=60,
+        blacklist_duration=30,
+        global_max_requests=100,
+    )
+)
+
+decision = guardian.check("192.168.1.1")
+print(decision.allowed)       # True / False
+print(decision.block_reason)  # None or BlockReason enum
+```
+
+### Run tests
+
+```bash
+pip install -e ".[dev]"
+pytest tests/ -v
+```
+
+---
+
 ## What is ChainShield?
 
 Traditional DDoS mitigation relies on centralised CDN services or firewalls that introduce a single point of trust and a single point of failure. Blockchain research has shown that on-chain rate limiting — enforced transparently by smart contracts — offers an alternative model where the rules are immutable, auditable, and not controlled by any single party.
