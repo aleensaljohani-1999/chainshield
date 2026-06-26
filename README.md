@@ -10,6 +10,18 @@
 
 ---
 
+## Demo
+
+| Clean State | Normal Traffic (5 req accepted) |
+|---|---|
+| ![clean](images/01-clean-state.png) | ![normal](images/02-normal-traffic.png) |
+
+| Rate Limit → Blacklisted | Global Ceiling Hit (20/20) |
+|---|---|
+| ![blocked](images/03-rate-limit-blocked.png) | ![global](images/04-global-limit.png) |
+
+---
+
 ## What is ChainShield?
 
 Traditional DDoS mitigation relies on centralised CDN services or firewalls that introduce a single point of trust and a single point of failure. Blockchain research has shown that on-chain rate limiting — enforced transparently by smart contracts — offers an alternative model where the rules are immutable, auditable, and not controlled by any single party.
