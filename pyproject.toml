@@ -1,0 +1,70 @@
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[project]
+name = "chainshield"
+version = "1.0.0"
+description = "Blockchain-inspired DDoS rate limiting with sliding window, temporary blacklist, and global ceiling"
+readme = "README.md"
+license = { file = "LICENSE" }
+requires-python = ">=3.10"
+keywords = ["ddos", "rate-limiting", "blockchain", "security", "middleware"]
+classifiers = [
+    "Development Status :: 4 - Beta",
+    "Intended Audience :: Developers",
+    "License :: OSI Approved :: MIT License",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Topic :: Internet :: WWW/HTTP :: HTTP Servers",
+    "Topic :: Security",
+]
+dependencies = []
+
+[project.optional-dependencies]
+flask = ["flask>=3.0"]
+fastapi = ["fastapi>=0.110", "starlette>=0.36"]
+dev = [
+    "pytest>=8.0",
+    "pytest-cov>=5.0",
+    "black>=24.0",
+    "ruff>=0.4",
+    "mypy>=1.10",
+    "bandit[toml]>=1.7",
+]
+
+[project.urls]
+Homepage = "https://github.com/yourusername/chainshield"
+Documentation = "https://github.com/yourusername/chainshield/tree/main/docs"
+Issues = "https://github.com/yourusername/chainshield/issues"
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+addopts = "-v --tb=short"
+
+[tool.black]
+line-length = 100
+target-version = ["py310"]
+
+[tool.ruff]
+line-length = 100
+target-version = "py310"
+
+[tool.ruff.lint]
+select = ["E", "F", "W", "I", "UP", "B", "S"]
+ignore = ["S101"]  # assert used in tests
+
+[tool.mypy]
+python_version = "3.10"
+strict = true
+ignore_missing_imports = true
+
+[tool.bandit]
+exclude_dirs = ["tests", "examples", "benchmarks"]
+skips = ["B101"]  # assert_used
+
+[tool.coverage.run]
+source = ["chainshield"]
+omit = ["*/tests/*"]
